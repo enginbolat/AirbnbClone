@@ -8,18 +8,17 @@
 import UIKit
 
 extension UILabel {
-    func applyStyle(_ style: TextStyle) {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.minimumLineHeight = style.lineHeight
-        paragraphStyle.maximumLineHeight = style.lineHeight
+    func applyStyle(_ style: TextStyle, color: UIColor? = nil) {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.minimumLineHeight = style.lineHeight
+        paragraph.maximumLineHeight = style.lineHeight
         
-        attributedText = NSAttributedString(
-            string: text ?? "",
-            attributes: [
-                .font: style.font,
-                .kern: style.letterSpacing,
-                .paragraphStyle: paragraphStyle
-            ]
-        )
+        let attrs: [NSAttributedString.Key: Any] = [
+            .font: style.font,
+            .kern: style.letterSpacing,
+            .paragraphStyle: paragraph,
+            .foregroundColor: color ?? self.textColor ?? .label
+        ]
+        attributedText = NSAttributedString(string: text ?? "", attributes: attrs)
     }
 }

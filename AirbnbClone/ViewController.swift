@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     let labelh5 :UILabel = {
         let label = UILabel()
         label.text = "Hello, Airbnb Clone!"
-        label.applyStyle(AppTypography.Heading.h5)
+        label.applyStyle(AppTypography.Heading.h5, color: AppColor.primary90)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     let labelh4 :UILabel = {
         let label = UILabel()
         label.text = "Hello, Airbnb Clone!"
-        label.applyStyle(AppTypography.Heading.h4)
+        label.applyStyle(AppTypography.Heading.h4, color: AppColor.primary60)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     let labelh3 :UILabel = {
         let label = UILabel()
         label.text = "Hello, Airbnb Clone!"
-        label.applyStyle(AppTypography.Heading.h3)
+        label.applyStyle(AppTypography.Heading.h3, color: AppColor.primary50)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     let labelh2 :UILabel = {
         let label = UILabel()
         label.text = "Hello, Airbnb Clone!"
-        label.applyStyle(AppTypography.Heading.h2)
+        label.applyStyle(AppTypography.Heading.h2, color: AppColor.primary40)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     let labelh1 :UILabel = {
         let label = UILabel()
         label.text = "Hello, Airbnb Clone!"
-        label.applyStyle(AppTypography.Heading.h1)
+        label.applyStyle(AppTypography.Heading.h1, color: AppColor.primary30)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
