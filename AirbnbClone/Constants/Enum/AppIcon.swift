@@ -6,12 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 /// TODO:
 /// Bazı ikonların arka planları beyaz kalmış durumda onları düzeltmek gerekli.
 
-
-enum AppIcon: CaseIterable {
+enum AppIcon: String, CaseIterable {
     case OutlineCar
     case OutlineLock
     case OutlineLocation
@@ -80,4 +80,14 @@ enum AppIcon: CaseIterable {
     //MARK: TwoTone
     case TwoToneEarnMoney
     case TwoToneAirbnbProject
+}
+
+extension AppIcon {
+    var image: UIImage? {
+        let name = String(describing: self)
+        if let img = UIImage(named: name) { return img }
+        print("⚠️ Missing icon asset: \(name)")
+        assertionFailure("Missing icon asset: \(name)")
+        return nil
+    }
 }
