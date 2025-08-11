@@ -15,24 +15,25 @@
 import UIKit
 
 final class ExploreView: UIView {
-    private let stack: UIStackView = {
-        let sv = UIStackView()
-        sv.axis = .vertical
-        sv.spacing = 12
-        sv.alignment = .fill
-        sv.distribution = .fill
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        return sv
+    let tableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.contentInsetAdjustmentBehavior = .never
+        table.sectionHeaderHeight = .leastNormalMagnitude
+        table.estimatedSectionHeaderHeight = .leastNormalMagnitude
+        table.sectionFooterHeight = .leastNormalMagnitude
+        table.estimatedSectionFooterHeight = .leastNormalMagnitude
+        return table
     }()
     
-    let icon = CategoryIcon(isActive: true,  title: "Water", icon: AppIcon.OutlineHotWater.rawValue)
-    let icon2 = CategoryIcon(isActive: true,  title: "Bed", icon: AppIcon.OutlineBed.rawValue)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
-        configureButtons()
         layout()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(RowItemCell.self, forCellReuseIdentifier: RowItemCell.reuseIdentifier)
     }
     
     required init?(coder: NSCoder) {
@@ -40,25 +41,42 @@ final class ExploreView: UIView {
     }
 }
 
-// MARK: - Setup
-private extension ExploreView {
-    func configureButtons() {
-      
-    }
-    
-    func layout() {
-        addSubview(stack)
-        
-        [icon,icon2]
-            .forEach { stack.addArrangedSubview($0) }
-        
-        directionalLayoutMargins = NSDirectionalEdgeInsets(top: 24, leading: 20, bottom: 24, trailing: 20)
-        preservesSuperviewLayoutMargins = true
+
+extension ExploreView {
+    private func layout() {
+        self.addSubViews(tableView)
         
         NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 20),
-            stack.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            stack.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
+}
+
+extension ExploreView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 512
+    }
+
+      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+          let cell = tableView.dequeueReusableCell( withIdentifier: RowItemCell.reuseIdentifier,
+                                                    for: indexPath
+                                                    ) as! RowItemCell
+
+          let model = RowItemCellModel(
+              icon: AppIcon.OutlineUser.rawValue,
+              title: "Row Item \(indexPath.row + 1)",
+              trailingIcon: AppIcon.OutlineChevronRight.rawValue
+          )
+          cell.configure(with: model)
+          return cell
+      }
+
+      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+          tableView.deselectRow(at: indexPath, animated: true)
+          // tıklama aksiyonu
+          print("Row tapped:", indexPath.row)
+      }
 }

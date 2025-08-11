@@ -43,6 +43,8 @@ class MainTabCoordinator: Coordinator {
         
         let controllers: [UINavigationController] = specs.enumerated().map { (idx, s) in
             let nav = UINavigationController(rootViewController: s.vc)
+            hideTopNavBar(nav)
+         
             let item = UITabBarItem(
                 title: s.title,
                 image: s.icon.image?.withRenderingMode(.alwaysTemplate),
@@ -55,6 +57,8 @@ class MainTabCoordinator: Coordinator {
             return nav
         }
         
+      
+        
         tabBar.viewControllers = controllers
         navigationController.setViewControllers([tabBar], animated: true)
     }
@@ -62,4 +66,12 @@ class MainTabCoordinator: Coordinator {
     @objc func logoutTapped() {
         appCoordinator?.goToOnboarding()
     }
+}
+
+
+private func hideTopNavBar(_ nav: UINavigationController) {
+    nav.isNavigationBarHidden = true
+    nav.setNavigationBarHidden(true, animated: false)
+    nav.hidesBarsOnSwipe = false
+    nav.navigationItem.largeTitleDisplayMode = .never
 }

@@ -23,10 +23,10 @@ extension ExploreViewController {
         view.addSubview(body)
         
         NSLayoutConstraint.activate([
-            body.topAnchor.constraint(equalTo: view.topAnchor),
+            body.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             body.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             body.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            body.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            body.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
