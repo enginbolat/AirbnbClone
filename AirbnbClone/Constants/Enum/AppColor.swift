@@ -33,6 +33,7 @@ extension AppColor {
     static var neutral70: UIColor { appColor("Neutral70") }
     static var neutral80: UIColor { appColor("Neutral80") }
     static var neutral90: UIColor { appColor("Neutral90") }
+    static var neutral100: UIColor { appColor("Neutral100") }
 }
 
 //MARK: Helper
